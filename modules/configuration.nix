@@ -44,7 +44,7 @@
   if machine.swap.enable
   then [
     {
-      device = "/dev/disk/by-partlabel/swap-${machine.hostname}";
+      device = "/dev/disk/by-partlabel/disk-main-swap-${machine.hostname}";
     }
   ]
   else [ ];
