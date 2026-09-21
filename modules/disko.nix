@@ -1,84 +1,80 @@
 { machine, ... }:
 
 {
-  disko.devices = {
-    disk.main = {
-      type = "disk";
-      device = machine.disk;
+  disko.devices.disk.main = {
+    type = "disk";
+    device = machine.disk;
 
-      content = {
-        type = "gpt";
+    content = {
+      type = "gpt";
 
-        partitions = {
-          ESP = {
-            size = "1G";
-            type = "EF00";
+      partitions = {
+        ESP = {
+          size = "1G";
+          type = "EF00";
 
-            content = {
-              type = "filesystem";
-              format = "vfat";
-              mountpoint = "/boot";
-              mountOptions = [
-                "umask=0077"
-              ];
-            };
+          content = {
+            type = "filesystem";
+            format = "vfat";
+            mountpoint = "/boot";
+            mountOptions = [ "umask=0077" ];
           };
+        };
 
-          root = {
-            # Оставляем место под swap в конце диска
-            size =
-              if machine.swap.enable
-              then null
-              else "100%";
+        root = {
+          # Оставляем место под swap в конце диска
+          size =
+            if machine.swap.enable
+            then null
+            else "100%";
 
-            end =
-              if machine.swap.enable
-              then "-${machine.swap.size}"
-              else null;
+          end =
+            if machine.swap.enable
+            then "-${machine.swap.size}"
+            else null;
 
-            content = {
-              type = "filesystem";
-              format = "btrfs";
+          content = {
+            type = "btrfs";
 
-              mountpoint = "/";
+            mountOptions = [
+              "compress=${machine.btrfs.compression}"
+            ];
 
-              mountOptions = [
-                "compress=${machine.btrfs.compression}"
-              ];
-
-              subvolumes = {
-                "@" = {
-                  mountpoint = "/";
-                };
-
-                "@home" = {
-                  mountpoint = "/home";
-                };
-
-                "@opt" = {
-                  mountpoint = "/opt";
-                };
-
-                "@nix" = {
-                  mountpoint = "/nix";
-                };
+            subvolumes = {
+              "@" = {
+                mountpoint = "/";
               };
 
-              postMountHook = ''
-                mkdir -p /mnt/home/root
-                ln -sfn ../home/root /mnt/root
-              '';
+              "@home" = {
+                mountpoint = "/home";
+              };
 
+              "@games" = {
+                mountpoint = "/games";
+              };
+
+              "@nix" = {
+                mountpoint = "/nix";
+              };
+
+              "@opt" = {
+                mountpoint = "/opt";
+              };
             };
+
+            postMountHook = ''
+              mkdir -p /mnt/home/root
+              ln -sfn ../home/root /mnt/root
+            '';
+
           };
+        };
 
-          swap = {
-            # Всё оставшееся место = swap
-            size = "100%";
+        swap = {
+          size = "100%";
 
-            content = {
-              type = "swap";
-            };
+          content = {
+            type = "swap";
           };
         };
       };
