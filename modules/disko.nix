@@ -38,10 +38,6 @@
                 mountpoint = "/home";
               };
 
-              "@games" = {
-                mountpoint = "/games";
-              };
-
               "@nix" = {
                 mountpoint = "/nix";
               };
@@ -50,11 +46,6 @@
                 mountpoint = "/opt";
               };
             };
-
-            postMountHook = ''
-              mkdir -p /mnt/home/root
-              ln -sfn ../home/root /mnt/root
-            '';
           };
         }
         // (
