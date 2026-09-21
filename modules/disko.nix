@@ -12,7 +12,7 @@
         ESP = {
           size = "1G";
           type = "EF00";
-          partlabel = "boot-${machine.hostname}";
+          name = "boot-${machine.hostname}";
 
           content = {
             type = "filesystem";
@@ -25,7 +25,7 @@
         root = {
           content = {
             type = "btrfs";
-            partlabel = "root-${machine.hostname}";
+            name = "root-${machine.hostname}";
 
             mountOptions = [
               "compress=${machine.btrfs.compression}"
@@ -62,7 +62,7 @@
       } // lib.optionalAttrs machine.swap.enable {
         swap = {
           size = "100%";
-          partlabel = "swap-${machine.hostname}";
+          name = "swap-${machine.hostname}";
 
           content = {
             type = "swap";
