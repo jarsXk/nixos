@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 nix --extra-experimental-features 'nix-command flakes' flake check
+nixos-rebuild dry-build --flake .#${1:nixmatevm}
