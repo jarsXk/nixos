@@ -5,7 +5,7 @@ if [ "$#" -ge 1 ]; then
     FLAKE=".#$1"    
 fi
 
-MODE="format,mount"
+MODE="mount"
 if [ "$#" -ge 2 ] && [ "$2" == "destroy" ]; then
     MODE="destroy,format,mount"
 fi

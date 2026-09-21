@@ -1,30 +1,23 @@
-{ ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  system.activationScripts.moveRootToHome = {
+  system.activationScripts.moveRootHome = {
     text = ''
-      set -euo pipefail
-
-      # Уже настроено
-      if [ -L /root ] && [ "$(readlink /root)" = "../home/root" ]; then
-        exit 0
-      fi
-
-      # Убедиться, что /home/root существует
-      mkdir -p /home/root
-      chown root:root /home/root
-      chmod 700 /home/root
-
-      # Если /root — обычный каталог, переносим всё его содержимое
       if [ -d /root ] && [ ! -L /root ]; then
-        find /root -mindepth 1 -maxdepth 1 \
-          -exec mv -t /home/root -- {} +
+        echo "Moving /root to /home/root..."
 
-        rmdir /root
+        if [ -e /home/root ]; then
+          echo "ERROR: /home/root already exists, refusing to overwrite it."
+          exit 1
+        fi
+
+        mv /root /home/root
+        ln -s /home/root /root
+
+        echo "Done: /root -> /home/root"
       fi
-
-      # Создаём относительную ссылку
-      ln -s ../home/root /root
     '';
+
+    deps = [];
   };
 }
