@@ -40,5 +40,14 @@
     "flakes"
   ];
 
+  swapDevices =
+  if machine.swap.enable
+  then [
+    {
+      device = "/dev/disk/by-partlabel/swap-${machine.hostname}";
+    }
+  ]
+  else [ ];
+
   system.stateVersion = "25.11";
 }
