@@ -1,6 +1,9 @@
 { config, pkgs, machine, ... }:
 
 {
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = machine.hostname;
 
   time.timeZone = machine.timezone;
