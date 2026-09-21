@@ -36,7 +36,7 @@
 
     in {
       nixosConfigurations = {
-        nixmatevm = mkSystem "nixmatevm";
+        nixsandbox = mkSystem "nixsandbox";
         # nixgnomevm = mkSystem "nixgnomevm";
       };
     };

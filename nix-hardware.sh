@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MACHINE="nixmatevm"
+MACHINE="nixsandbox"
 if [ "$#" -ge 1 ]; then
     MACHINE="$1"
 fi

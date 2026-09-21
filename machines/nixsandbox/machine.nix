@@ -1,5 +1,5 @@
 {
-  hostname = "nixmatevm";
+  hostname = "nixsandbox";
 
   btrfs = {
     compression = "zstd:3";
@@ -13,12 +13,5 @@
   swap = {
     enable = true;
     size = "1G";
-  };
-
-  desktop = "mate";
-
-  encryption = {
-    enable = true;
-    tpm2 = true;
   };
 }

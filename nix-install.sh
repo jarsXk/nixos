@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FLAKE=".#nixmatevm"
+FLAKE=".#nixsandbox"
 if [ "$#" -ge 1 ]; then
     FLAKE=".#$1"    
 fi
