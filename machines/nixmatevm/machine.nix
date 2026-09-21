@@ -8,7 +8,7 @@
   username = "lesha";
   timezone = "Europe/Moscow";
 
-  disk = "/dev/nvme0n1";
+  disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
 
   swap = {
     enable = true;
