@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ./modules/root-to-home.nix
+    ./root-to-home.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
