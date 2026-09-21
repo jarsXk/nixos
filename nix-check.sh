@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-if [ "$#" -lt 1 ]; then
-    FLAKE=".#nixmatevm"
-else
+FLAKE=".#nixmatevm"
+if [ "$#" -ge 1 ]; then
     FLAKE=".#$1"
 fi
 

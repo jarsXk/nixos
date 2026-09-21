@@ -22,17 +22,6 @@
         };
 
         root = {
-          # Оставляем место под swap в конце диска
-          size =
-            if machine.swap.enable
-            then null
-            else "100%";
-
-          end =
-            if machine.swap.enable
-            then "-${machine.swap.size}"
-            else null;
-
           content = {
             type = "btrfs";
 
@@ -66,10 +55,18 @@
               mkdir -p /mnt/home/root
               ln -sfn ../home/root /mnt/root
             '';
-
           };
-        };
-
+        }
+        // (
+          if machine.swap.enable
+          then {
+            end = "-${machine.swap.size}";
+          }
+          else {
+            size = "100%";
+          }
+        );
+      } // lib.optionalAttrs machine.swap.enable {
         swap = {
           size = "100%";
 
