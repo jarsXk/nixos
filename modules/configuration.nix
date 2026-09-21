@@ -7,6 +7,7 @@
 
   users.users.${machine.username} = {
     isNormalUser = true;
+    initialPassword = "p@ssword"
 
     extraGroups = [
       "wheel"

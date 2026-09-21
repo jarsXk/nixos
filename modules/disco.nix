@@ -43,7 +43,7 @@
               mountpoint = "/";
 
               mountOptions = [
-                "compress=zstd"
+                "compress=${machine.btrfs.compression}"
               ];
 
               subvolumes = {
@@ -63,6 +63,12 @@
                   mountpoint = "/nix";
                 };
               };
+
+              postMountHook = ''
+                mkdir -p /mnt/home/root
+                ln -sfn ../home/root /mnt/root
+              '';
+
             };
           };
 

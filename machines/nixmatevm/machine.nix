@@ -1,6 +1,10 @@
 {
   hostname = "nixmatevm";
 
+  btrfs = {
+    compression = "zstd:3";
+  };
+
   username = "lesha";
   timezone = "Europe/Moscow";
 
