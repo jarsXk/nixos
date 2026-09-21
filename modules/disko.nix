@@ -23,9 +23,9 @@
         };
 
         root = {
+          name = "root-${machine.hostname}";
           content = {
             type = "btrfs";
-            name = "root-${machine.hostname}";
 
             mountOptions = [
               "compress=${machine.btrfs.compression}"
