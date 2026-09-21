@@ -6,7 +6,7 @@ if [ "$#" -ge 1 ]; then
 fi
 
 MODE="format,mount"
-if [ "$#" -ge 2 ] && [ "$2" -eq "destroy" ]; then
+if [ "$#" -ge "2" ] && [ "$2" -eq "destroy" ]; then
     MODE="destroy,format,mount"
 fi
 
