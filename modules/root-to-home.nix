@@ -5,6 +5,8 @@
     description = "Move /root to /home/root";
 
     wantedBy = [ "multi-user.target" ];
+    after = [ "local-fs.target" ];
+    requires = [ "local-fs.target" ];
 
     serviceConfig = {
       Type = "oneshot";
