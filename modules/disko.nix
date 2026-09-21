@@ -1,4 +1,4 @@
-{ machine, ... }:
+{ lib, machine, ... }:
 
 {
   disko.devices.disk.main = {
